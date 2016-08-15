@@ -74,7 +74,7 @@ def format_timedelta(delta):
 def format_params(params):
     desc = []
     for key in params:
-        desc.append("`{}: {}`".format(key, params[key]))
+        desc.append("`{}={}`".format(key, params[key]))
 
     if desc:
         return ", ".join(desc)
