@@ -2,7 +2,7 @@
 
 Integrates with Slack slash commands API and Jenkins, providing you access to do control Jenkins builds from Slack.
 
-Commands supported:
+Commands supported (assuming you use `/build` as the command):
 
  - `/build` - Shows help
  - `/build help` - Shows help
