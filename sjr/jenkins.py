@@ -1,6 +1,7 @@
 import logging
 import settings
 from jenkinsapi.jenkins import Jenkins as JenkinsAPI
+from jenkinsapi.custom_exceptions import NoBuildData
 from sjr.utils import MWT, format_timedelta
 from sjr.errors import JenkinsError
 
@@ -45,7 +46,11 @@ class Jenkins(object):
 
         try:
             job = server.get_job(name)
-            last_build = job.get_last_good_build()
+            try:
+                last_build = job.get_last_good_build()
+            except NoBuildData:
+                last_build = None
+
             qi = job.invoke(build_params=params)
 
             if last_build:
