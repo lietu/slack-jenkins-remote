@@ -271,7 +271,8 @@ def build_completed(data, build):
     """
 
     name, params = parse_params(get_args(data))
-    status = build.get_status()
+    status = (build.get_status() == "SUCCESS")
+
     response = {
         "response_type": "in_channel",
         "attachments": [
@@ -279,7 +280,7 @@ def build_completed(data, build):
                 "color": "#36a64f" if status else "#d50200",
                 "title": "Built {}, result was a {}".format(
                     name,
-                    status if status else "FAILURE"
+                    "SUCCESS" if status else "FAILURE"
                 ),
                 "title_link": build.get_result_url(),
                 "text": "Jenkins built {} ({}) in {}".format(
@@ -371,7 +372,7 @@ def build(data):
 
         # TODO: Enable if there is a way to update messages
         # instead of just appending new ones...
-        #if elapsed > 30:
+        # if elapsed > 30:
         #             build_started(data, eta)
         #    last_message = now
 
