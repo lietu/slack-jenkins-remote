@@ -295,6 +295,15 @@ def build_completed(data, build):
 
     send_response(data, response)
 
+    if not status:
+        console = build.get_console()
+        response = {
+            "response_type": "in_channel",
+            "text": console,
+            "mrkdwn": False,
+        }
+        send_response(data, response)
+
 
 def job_not_found(data):
     """
